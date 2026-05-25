@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Style Tile — Direction</title>
+
+<!--
+  STYLE TILE TEMPLATE
+  ───────────────────
+  Reskin a direction by editing ONLY the :root variables below.
+  Swap the Google Fonts <link> to change the type pairing.
+  Replace the sample copy / adjectives / influences inline.
+  For a DARK direction: set --bg/--surface dark and --ink/--ink-2/--muted light,
+  soften --border to a low-alpha white, and darken the page via --page.
+  Then render in a browser at ~1440px wide and full-page screenshot it.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400&family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* ── Palette ───────────────────────────────── */
+    --page:      #1C1A17;   /* gallery backdrop behind the board */
+    --bg:        #FBFAF8;   /* board background (warm paper) */
+    --surface:   #FFFFFF;   /* raised surfaces */
+    --surface-2: #F3EFE9;   /* sunken / muted surface */
+    --ink:       #1A1714;   /* primary text */
+    --ink-2:     #57514A;   /* secondary text */
+    --muted:     #8C857B;   /* tertiary / captions */
+    --border:    #E8E2D9;   /* hairlines */
+    --accent:    #C75B39;   /* the ONE confident accent */
+    --accent-ink:#FFFFFF;   /* text on accent */
+    --accent-soft:#F7E7DF;  /* accent tint */
+    --success:   #2E7D5B;
+    --warn:      #B07A12;
+    --danger:    #BE3A2B;
+
+    /* ── Radii ─────────────────────────────────── */
+    --r-sm: 9px;
+    --r-md: 16px;
+    --r-lg: 24px;
+
+    /* ── Shadows (one coherent language) ───────── */
+    --sh-sm: 0 1px 2px rgba(26,23,20,.06), 0 1px 1px rgba(26,23,20,.04);
+    --sh-md: 0 8px 24px -6px rgba(26,23,20,.14), 0 2px 6px -2px rgba(26,23,20,.08);
+    --sh-lg: 0 32px 70px -16px rgba(26,23,20,.26);
+
+    /* ── Type ──────────────────────────────────── */
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:    'Geist', system-ui, -apple-system, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(199,91,57,.10), transparent 60%),
+      var(--page);
+    color:var(--ink);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    padding:56px 40px 72px;
+    display:flex;
+    justify-content:center;
+  }
+
+  /* ── Board ───────────────────────────────────── */
+  .board{
+    position:relative;
+    width:100%;
+    max-width:1180px;
+    background:var(--bg);
+    border-radius:var(--r-lg);
+    box-shadow:var(--sh-lg);
+    padding:64px;
+    overflow:hidden;
+  }
+  /* faint grain for an agency finish */
+  .board::after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .board > *{ position:relative; z-index:1; }
+
+  .label{
+    font-family:var(--font-mono); font-size:11px; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+    margin:0 0 18px;
+  }
+
+  /* ── Header ──────────────────────────────────── */
+  header{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:40px;
+    padding-bottom:36px; margin-bottom:44px; border-bottom:1px solid var(--border);
+  }
+  .eyebrow{ font-family:var(--font-mono); font-size:12px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 14px; }
+  h1{ font-family:var(--font-display); font-weight:600; font-size:58px;
+    line-height:.98; letter-spacing:-.02em; margin:0 0 16px; }
+  .lede{ font-size:17px; line-height:1.5; color:var(--ink-2); max-width:46ch; margin:0; }
+  .adjectives{ display:flex; flex-direction:column; gap:10px; align-items:flex-end;
+    flex-shrink:0; padding-top:6px; }
+  .adjectives span{ font-family:var(--font-display); font-style:italic; font-size:22px;
+    color:var(--ink); }
+  .adjectives span::before{ content:"— "; color:var(--accent); font-style:normal; }
+
+  /* ── Section grid ────────────────────────────── */
+  section{ margin-bottom:48px; }
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+
+  /* Palette */
+  .swatches{ display:grid; grid-template-columns:repeat(6,1fr); gap:14px; }
+  .swatch .chip{ height:84px; border-radius:var(--r-md); box-shadow:var(--sh-sm);
+    border:1px solid rgba(26,23,20,.06); }
+  .swatch .name{ font-size:13px; font-weight:500; margin:12px 0 2px; }
+  .swatch .hex{ font-family:var(--font-mono); font-size:11px; color:var(--muted);
+    text-transform:uppercase; }
+
+  /* Typography */
+  .type-display{ font-family:var(--font-display); font-size:56px; line-height:1;
+    letter-spacing:-.02em; margin:0 0 6px; }
+  .type-meta{ font-family:var(--font-mono); font-size:11px; color:var(--muted);
+    letter-spacing:.08em; margin-bottom:28px; }
+  .scale > *{ margin:0 0 14px; }
+  .s-h1{ font-family:var(--font-display); font-weight:600; font-size:34px; line-height:1.1;
+    letter-spacing:-.01em; }
+  .s-h2{ font-family:var(--font-display); font-weight:500; font-size:23px; line-height:1.2; }
+  .s-body{ font-size:16px; line-height:1.6; color:var(--ink-2); max-width:52ch; }
+  .s-cap{ font-family:var(--font-mono); font-size:12px; color:var(--muted); letter-spacing:.04em; }
+
+  /* Components */
+  .row{ display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-bottom:22px; }
+  .btn{ font-family:var(--font-body); font-size:15px; font-weight:500; cursor:pointer;
+    padding:11px 20px; border-radius:var(--r-sm); border:1px solid transparent;
+    transition:transform .15s ease; }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); box-shadow:var(--sh-sm); }
+  .btn-secondary{ background:var(--surface); color:var(--ink); border-color:var(--border);
+    box-shadow:var(--sh-sm); }
+  .btn-ghost{ background:transparent; color:var(--ink-2); padding-left:8px; padding-right:8px; }
+  .field{ display:flex; flex-direction:column; gap:7px; max-width:320px; }
+  .field label{ font-size:13px; font-weight:500; color:var(--ink-2); }
+  .field input{ font-family:var(--font-body); font-size:15px; color:var(--ink);
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--r-sm);
+    padding:11px 14px; outline:none; }
+  .field input::placeholder{ color:var(--muted); }
+  .badge{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:500;
+    color:var(--accent); background:var(--accent-soft); padding:5px 12px; border-radius:999px; }
+  .badge.dot::before{ content:""; width:6px; height:6px; border-radius:999px; background:var(--accent); }
+  .toggle{ width:46px; height:27px; border-radius:999px; background:var(--accent);
+    position:relative; box-shadow:inset 0 1px 2px rgba(0,0,0,.12); }
+  .toggle::after{ content:""; position:absolute; top:3px; left:22px; width:21px; height:21px;
+    border-radius:999px; background:#fff; box-shadow:var(--sh-sm); }
+  .mini-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
+    box-shadow:var(--sh-sm); padding:18px 20px; max-width:300px; }
+  .mini-card h4{ font-family:var(--font-display); font-weight:600; font-size:18px; margin:0 0 6px; }
+  .mini-card p{ font-size:14px; line-height:1.5; color:var(--ink-2); margin:0 0 14px; }
+  .mini-card .meta{ font-family:var(--font-mono); font-size:11px; color:var(--muted); }
+
+  /* Effects */
+  .effects{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .effect{ background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
+    padding:18px; }
+  .effect .t{ font-size:13px; font-weight:500; margin-bottom:14px; }
+  .radii{ display:flex; align-items:flex-end; gap:10px; }
+  .radii i{ display:block; width:34px; height:34px; background:var(--accent-soft);
+    border:1px solid var(--accent); }
+  .sh-demo{ display:flex; gap:14px; }
+  .sh-demo i{ width:48px; height:48px; border-radius:var(--r-sm); background:var(--surface); }
+  .grad{ height:62px; border-radius:var(--r-sm);
+    background:linear-gradient(120deg, var(--accent), #E89B5A 55%, var(--ink)); }
+
+  /* Imagery direction */
+  .imagery{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .img-tile{ border-radius:var(--r-md); overflow:hidden; box-shadow:var(--sh-sm);
+    border:1px solid var(--border); }
+  .img-tile .ph{ height:140px; }
+  .img-tile .cap{ background:var(--surface); padding:12px 14px; font-size:13px; color:var(--ink-2); }
+  .ph-1{ background:linear-gradient(135deg,#EBD9CC,#C75B39); }
+  .ph-2{ background:linear-gradient(135deg,#2A2521,#57514A); }
+  .ph-3{ background:linear-gradient(135deg,#F3EFE9,#D9CFC2); }
+
+  /* In-context vignette — the proof it reads as designed */
+  .vignette{ border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-md);
+    border:1px solid var(--border); background:
+      radial-gradient(100% 120% at 0% 0%, var(--accent-soft), transparent 55%), var(--surface); }
+  .vignette .inner{ display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center;
+    padding:48px; }
+  .v-eyebrow{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 16px; }
+  .v-title{ font-family:var(--font-display); font-weight:600; font-size:40px; line-height:1.02;
+    letter-spacing:-.02em; margin:0 0 16px; }
+  .v-sub{ font-size:16px; line-height:1.55; color:var(--ink-2); max-width:40ch; margin:0 0 26px; }
+  .v-card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
+    box-shadow:var(--sh-lg); padding:22px; }
+  .v-card .top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+  .v-card .avatar{ width:38px; height:38px; border-radius:999px;
+    background:linear-gradient(135deg,var(--accent),#E89B5A); }
+  .v-row{ display:flex; justify-content:space-between; align-items:center;
+    padding:12px 0; border-top:1px solid var(--border); font-size:14px; }
+  .v-row:first-of-type{ border-top:none; }
+  .v-row .k{ color:var(--ink-2); } .v-row .v{ font-weight:500; }
+  .v-num{ font-family:var(--font-display); font-weight:600; font-size:30px; }
+
+  /* Footer */
+  footer{ display:flex; justify-content:space-between; align-items:center; gap:24px;
+    padding-top:32px; margin-top:8px; border-top:1px solid var(--border); }
+  footer .influences{ font-size:14px; color:var(--ink-2); }
+  footer .influences b{ font-weight:500; color:var(--ink); }
+  footer .voice{ font-family:var(--font-display); font-style:italic; font-size:16px; color:var(--ink-2);
+    text-align:right; max-width:42ch; }
+</style>
+</head>
+<body>
+  <div class="board">
+
+    <!-- HEADER -->
+    <header>
+      <div>
+        <p class="eyebrow">Style Tile · Direction 01</p>
+        <h1>Quiet Confidence</h1>
+        <p class="lede">A paper-warm system with one decisive accent. Restraint over decoration — every element earns its place.</p>
+      </div>
+      <div class="adjectives">
+        <span>Confident</span>
+        <span>Precise</span>
+        <span>Quietly premium</span>
+      </div>
+    </header>
+
+    <!-- PALETTE -->
+    <section>
+      <p class="label">Palette</p>
+      <div class="swatches">
+        <div class="swatch"><div class="chip" style="background:var(--accent)"></div><div class="name">Accent</div><div class="hex">#C75B39</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--ink)"></div><div class="name">Ink</div><div class="hex">#1A1714</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--ink-2)"></div><div class="name">Ink 2</div><div class="hex">#57514A</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--surface-2)"></div><div class="name">Surface</div><div class="hex">#F3EFE9</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--accent-soft)"></div><div class="name">Accent soft</div><div class="hex">#F7E7DF</div></div>
+        <div class="swatch"><div class="chip" style="background:var(--bg);border-color:var(--border)"></div><div class="name">Paper</div><div class="hex">#FBFAF8</div></div>
+      </div>
+    </section>
+
+    <div class="cols">
+      <!-- TYPOGRAPHY -->
+      <section>
+        <p class="label">Typography</p>
+        <div class="type-display">Aa</div>
+        <div class="type-meta">FRAUNCES — DISPLAY · GEIST — BODY · JETBRAINS MONO — CODE</div>
+        <div class="scale">
+          <p class="s-h1">Build the interface they remember.</p>
+          <p class="s-h2">Crafted for clarity and speed</p>
+          <p class="s-body">Tokens flow from a single source of truth, so the system stays coherent as it grows. Type, color, and space resolve to one quiet point of view.</p>
+          <p class="s-cap">UPDATED 2 MIN AGO · V2.4.0</p>
+        </div>
+      </section>
+
+      <!-- COMPONENTS -->
+      <section>
+        <p class="label">Components</p>
+        <div class="row">
+          <button class="btn btn-primary">Create agent</button>
+          <button class="btn btn-secondary">Browse templates</button>
+          <button class="btn btn-ghost">Skip</button>
+        </div>
+        <div class="row">
+          <span class="badge dot">Live</span>
+          <span class="badge">Draft</span>
+          <div class="toggle" role="switch" aria-checked="true"></div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label>Workspace name</label>
+            <input value="Northwind Labs" />
+          </div>
+        </div>
+        <div class="mini-card">
+          <h4>Research assistant</h4>
+          <p>Summarizes sources and drafts a brief from your prompts.</p>
+          <span class="meta">12 STEPS · 3 TOOLS</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- EFFECTS -->
+    <section>
+      <p class="label">Effects &amp; system</p>
+      <div class="effects">
+        <div class="effect"><div class="t">Radius — 9 / 16 / 24</div><div class="radii"><i style="border-radius:var(--r-sm)"></i><i style="border-radius:var(--r-md)"></i><i style="border-radius:var(--r-lg)"></i></div></div>
+        <div class="effect"><div class="t">Elevation — sm / md / lg</div><div class="sh-demo"><i style="box-shadow:var(--sh-sm)"></i><i style="box-shadow:var(--sh-md)"></i><i style="box-shadow:var(--sh-lg)"></i></div></div>
+        <div class="effect"><div class="t">Accent gradient + grain</div><div class="grad"></div></div>
+      </div>
+    </section>
+
+    <!-- IMAGERY DIRECTION -->
+    <section>
+      <p class="label">Imagery direction</p>
+      <div class="imagery">
+        <div class="img-tile"><div class="ph ph-1"></div><div class="cap">Soft daylight, generous negative space</div></div>
+        <div class="img-tile"><div class="ph ph-2"></div><div class="cap">Macro texture: paper, ceramic, metal</div></div>
+        <div class="img-tile"><div class="ph ph-3"></div><div class="cap">Muted duotone in accent + ink</div></div>
+      </div>
+    </section>
+
+    <!-- IN-CONTEXT VIGNETTE -->
+    <section>
+      <p class="label">In context</p>
+      <div class="vignette">
+        <div class="inner">
+          <div>
+            <p class="v-eyebrow">New agent</p>
+            <h2 class="v-title">Start from a template, ship in minutes.</h2>
+            <p class="v-sub">Pick a starting point, tune the steps, and your agent is live — no boilerplate, no guesswork.</p>
+            <div class="row" style="margin:0">
+              <button class="btn btn-primary">Get started</button>
+              <button class="btn btn-ghost">See how it works →</button>
+            </div>
+          </div>
+          <div class="v-card">
+            <div class="top"><div class="avatar"></div><span class="badge dot">Active</span></div>
+            <div class="v-num">1,284</div>
+            <p class="s-cap" style="margin:2px 0 16px">RUNS THIS WEEK</p>
+            <div class="v-row"><span class="k">Success rate</span><span class="v">98.2%</span></div>
+            <div class="v-row"><span class="k">Avg. latency</span><span class="v">1.4s</span></div>
+            <div class="v-row"><span class="k">Tools</span><span class="v">3 connected</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="influences">Influences: <b>Linear · Stripe · Mercury · Things</b></p>
+      <p class="voice">Speaks plainly and with intent. Never shouts; never hedges.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
