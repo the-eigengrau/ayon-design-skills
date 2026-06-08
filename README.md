@@ -1,6 +1,6 @@
 # ayon-design-skills
 
-A marketplace of production-grade skills to help you design with Claude Code against a serious craft bar.
+A marketplace of production-grade skills to help you design and spec product with Claude Code against a serious craft bar.
 
 ## Skills
 
@@ -9,6 +9,7 @@ A marketplace of production-grade skills to help you design with Claude Code aga
 | **gather-inspiration** | Gather top-tier UI/UX inspiration: production-app screenshots, agency-grade style tiles, or a written UX recommendation. |
 | **figma-to-prototype** | Turn a Figma design into a high-fidelity, interactive Next.js + Tailwind prototype, verified in a real browser. |
 | **design-review** | Review a running UI's visual and interaction design against a strict craft bar; reports findings and a prioritized fix plan. |
+| **write-prd** | Write or revise a PRD in a tight, intuition-first style on a standard product-spec template; lands it in a Linear project or in chat. |
 
 ## Install
 
@@ -30,6 +31,7 @@ Or pick individual skills à la carte:
 /plugin install gather-inspiration@ayon-design-skills
 /plugin install figma-to-prototype@ayon-design-skills
 /plugin install design-review@ayon-design-skills
+/plugin install write-prd@ayon-design-skills
 ```
 
 Pull future updates with:
@@ -62,9 +64,12 @@ ayon-design-skills/
     ├── figma-to-prototype/
     │   ├── .claude-plugin/plugin.json
     │   └── skills/figma-to-prototype/
-    └── gather-inspiration/
+    ├── gather-inspiration/
+    │   ├── .claude-plugin/plugin.json
+    │   └── skills/gather-inspiration/
+    └── write-prd/
         ├── .claude-plugin/plugin.json
-        └── skills/gather-inspiration/
+        └── skills/write-prd/             # SKILL.md + references/
 ```
 
 The `everything` plugin reuses those same skill folders via a `strict: false` catalog entry, so no
