@@ -1,7 +1,7 @@
 {
   "name": "ayon-design-skills",
   "owner": { "name": "Ayon Bhattacharya", "email": "ayon.ux@gmail.com" },
-  "description": "Craft-focused Claude Code skills for designing and speccing product: gather inspiration, turn Figma into interactive prototypes, run rigorous design reviews, and write tight PRDs.",
+  "description": "Design-focused Claude Code skills for the full UI workflow: gather inspiration, turn Figma into interactive prototypes, and run rigorous design reviews.",
   "plugins": [
     {
       "name": "design-review",
@@ -19,20 +19,14 @@
       "description": "Gather top-tier UI/UX inspiration — production-app screenshots, agency-grade style tiles, or a UX recommendation."
     },
     {
-      "name": "write-prd",
-      "source": "./plugins/write-prd",
-      "description": "Write or revise a PRD in a tight, intuition-first style on a standard product-spec template; lands it in a Linear project or in chat."
-    },
-    {
       "name": "everything",
       "source": "./",
-      "description": "All four skills in one install — gather inspiration, build Figma prototypes, run design reviews, and write PRDs.",
+      "description": "All three design skills in one install — gather inspiration, build Figma prototypes, and run design reviews.",
       "strict": false,
       "skills": [
         "./plugins/design-review/skills/design-review",
         "./plugins/figma-to-prototype/skills/figma-to-prototype",
-        "./plugins/gather-inspiration/skills/gather-inspiration",
-        "./plugins/write-prd/skills/write-prd"
+        "./plugins/gather-inspiration/skills/gather-inspiration"
       ]
     }
   ]
